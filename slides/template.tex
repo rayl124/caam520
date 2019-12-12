@@ -1,0 +1,72 @@
+% Document setup
+\documentclass[12pt,t]{beamer}
+\usetheme[outer/progressbar=none]{metropolis}
+% Algorithm environment and layout
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\algloopdefx{Return}{\textbf{return} }
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[T1]{fontenc}
+
+\usepackage{xparse}
+\newbox\FBox
+\NewDocumentCommand\Highlight{O{black}O{white}mO{0.5pt}O{0pt}O{0pt}}{%
+    \setlength\fboxsep{#4}\sbox\FBox{\fcolorbox{#1}{#2}{#3\rule[-#5]{0pt}{#6}}}\usebox\FBox}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[outdir=./]{epstopdf}
+\usepackage{color}
+\newcommand{\red}[1]{{\color{red}#1}}
+\usepackage{caption}
+\definecolor{RiceBlue}{HTML}{004080}
+\definecolor{BackgroundColor}{rgb}{1.0,1.0,1.0}
+\setbeamercolor{frametitle}{bg=RiceBlue}
+\setbeamercolor{background canvas}{bg=BackgroundColor}
+\setbeamercolor{progress bar}{fg=RiceBlue}
+\setbeamertemplate{caption}[default]
+
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\usepackage{xcolor}
+
+\usepackage{adjustbox}
+
+\usepackage[absolute,overlay]{textpos}
+
+%% Overwrite font settings to make text and math font consistent.
+\usepackage[sfdefault,lining]{FiraSans}
+\usepackage[slantedGreek]{newtxsf}
+\renewcommand*\partial{\textsf{\reflectbox{6}}}
+\let\emph\relax % there's no \RedeclareTextFontCommand
+\DeclareTextFontCommand{\emph}{\bfseries\em}
+
+\renewcommand*{\vec}[1]{{\boldsymbol{#1}}}
+
+\begin{document}
+  % Title page
+  \title{TITLE}
+  \subtitle{Computational Science II (CAAM 520)}
+  \author{Christopher Thiele}
+  \date{Rice University, Spring 2020}
+
+  \setbeamertemplate{footline}{}
+  \begin{frame}
+    \titlepage
+  \end{frame}
+
+  \setbeamertemplate{footline}{
+    \usebeamercolor[fg]{page number in head}%
+    \usebeamerfont{page number in head}%
+    \hspace*{\fill}\footnotesize-\insertframenumber-\hspace*{\fill}
+    \vspace*{0.1in}
+  }
+
+  \begin{frame}
+    \frametitle{First slide}
+
+  \end{frame}
+\end{document}
