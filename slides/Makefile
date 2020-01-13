@@ -2,7 +2,7 @@ all: *.tex
 	pdflatex $^
 
 clean_tmp:
-	rm -f *.out *.toc *.snm *.fls *.fdb_latexmk *.aux *.nav *.log *.synctex.gz
+	rm -f *.out *.toc *.snm *.fls *.fdb_latexmk *.aux *.nav *.log *.synctex.gz *.vrb
 
 clean: clean_tmp
 	rm -f *.pdf
