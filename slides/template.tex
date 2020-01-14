@@ -34,7 +34,7 @@
 \usepackage{xcolor}
 
 \usepackage{listings}
-\lstset{basicstyle=\footnotesize, xleftmargin=-0.25in}
+\lstset{basicstyle=\footnotesize,showstringspaces=false}
 
 \usepackage{adjustbox}
 
@@ -48,6 +48,20 @@
 \DeclareTextFontCommand{\emph}{\bfseries\em}
 
 \renewcommand*{\vec}[1]{{\boldsymbol{#1}}}
+
+\newcommand{\conclude}[1]{%
+  \begin{itemize}
+    \item[$\rightarrow$]#1
+  \end{itemize}
+}
+\newcommand{\codeline}[2][]{%
+  \begin{lstlisting}[language=c++,#1]^^J
+    #2^^J
+  \end{lstlisting}
+}
+\newcommand{\codefile}[2][]{\lstinputlisting[language=c++,frame=single,breaklines=true,#1]{#2}}
+\lstnewenvironment{code}{\lstset{language=c++,frame=single}}{}
+
 
 \begin{document}
   % Title page
@@ -68,7 +82,7 @@
     \vspace*{0.1in}
   }
 
-  \begin{frame}
+  \begin{frame}[fragile]
     \frametitle{First slide}
 
   \end{frame}
