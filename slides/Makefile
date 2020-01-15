@@ -1,5 +1,5 @@
 all: *.tex
-	pdflatex $^
+	latexmk -pdf
 
 clean_tmp:
 	rm -f *.out *.toc *.snm *.fls *.fdb_latexmk *.aux *.nav *.log *.synctex.gz *.vrb
