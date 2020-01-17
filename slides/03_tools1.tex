@@ -109,12 +109,20 @@
 
     To compile a single source file \texttt{test.c} in to an \emph{executable} or \emph{binary} called \texttt{test}, we simply run
     \cmd{gcc -o test test.c}
-
-    \conclude{This includes compilation and linking steps! Let's look at them separately.}
   \end{frame}
 
   \begin{frame}[fragile]
     \frametitle{Compiler}
+
+    Use the compiler to your advantage!
+
+    The compiler can help you with a lot of warnings if you write code that is not robust and potentially faulty:
+    \cmd{gcc -Wall -Wextra -Wpedantic -o test test.c}
+  \end{frame}
+
+  \begin{frame}[fragile]
+    \frametitle{Compiler}
+    So far we compiled and linked in one step! Let's look at both steps separately.
 
     If we only want to compile, i.e., translate C code into machine code, we run
     \cmd{gcc -c -o test.o test.c}
