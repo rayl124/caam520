@@ -106,7 +106,7 @@ int main(int argc, char **argv)
   }
 
   printf("Sorting integer array with generic algorithm...\n");
-  //sort(x, num_elements, sizeof(int), compare_int);
+  sort(x, num_elements, sizeof(int), compare_int);
 
   // Create array of random character strings and sort with generic algorithm.
   str32 *strings = malloc(num_elements*sizeof(str32));
