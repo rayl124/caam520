@@ -40,6 +40,14 @@
 
 \usepackage[absolute,overlay]{textpos}
 
+% Footnotes without a number
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{\tiny #1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 %% Overwrite font settings to make text and math font consistent.
 \usepackage[sfdefault,lining]{FiraSans}
 \usepackage[slantedGreek]{newtxsf}
