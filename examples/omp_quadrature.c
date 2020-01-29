@@ -22,7 +22,7 @@ double quad_trapezoidal(double (*f)(double), double a, double b, int n)
 
 int main()
 {
-  const int n[] = {1, 10, 25, 50, 75, 100};
+  const int n[] = {4, 16, 32, 64, 128, 256};
   const double I_true = 1.0 + PI*PI/8.0;
 
   for (int j = 0; j < sizeof(n)/sizeof(int); j++) {
