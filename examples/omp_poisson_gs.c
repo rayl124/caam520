@@ -62,7 +62,6 @@ int main(int argc, char **argv)
     fprintf(stderr, "Error: Number of threads must divide problem size!\n");
     return -1;
   }
-  const int n_thread = n/num_threads;
 
   const double h = 1.0/(n - 1);
 
