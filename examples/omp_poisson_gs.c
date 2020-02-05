@@ -24,23 +24,39 @@ void gauss_seidel(double *u, const double *f, int n, int num_iter)
   const double h = 1.0/(n - 1);
   const double h2 = h*h;
 
-  for (int iter = 0; iter < num_iter; iter++) {
-    for (int k = 0; k < n; k++) {
-      for (int j = 0; j < n; j++) {
-        for (int i = 0; i < n; i++) {
-          double u_new = h2*f[IJK2INDEX(i, j, k, n)];
+  #pragma omp parallel
+  {
+    const int thread_id = omp_get_thread_num();
+    const int num_threads = omp_get_num_threads();
 
-          if (i > 1)     u_new += u[IJK2INDEX(i - 1, j,     k,     n)];
-          if (i < n - 1) u_new += u[IJK2INDEX(i + 1, j,     k,     n)];
-          if (j > 1)     u_new += u[IJK2INDEX(i,     j - 1, k,     n)];
-          if (j < n - 1) u_new += u[IJK2INDEX(i,     j + 1, k,     n)];
-          if (k > 1)     u_new += u[IJK2INDEX(i,     j,     k - 1, n)];
-          if (k < n - 1) u_new += u[IJK2INDEX(i,     j,     k + 1, n)];
+    const int n_thread = n/num_threads;
 
-          u_new /= 6.0;
+    for (int iter = 0; iter < num_iter; iter++) {
+      for (int w = 0; w < n + num_threads; w++) {
+        const int k = w - thread_id;
 
-          u[IJK2INDEX(i, j, k, n)] = u_new;
+        if (k >= 0 && k < n) {
+          const int j_start = n_thread*thread_id;
+          const int j_end = j_start + n_thread;
+          for (int j = j_start; j < j_end; j++) {
+            for (int i = 0; i < n; i++) {
+              double u_new = h2*f[IJK2INDEX(i, j, k, n)];
+
+              if (i > 1)     u_new += u[IJK2INDEX(i - 1, j,     k,     n)];
+              if (i < n - 1) u_new += u[IJK2INDEX(i + 1, j,     k,     n)];
+              if (j > 1)     u_new += u[IJK2INDEX(i,     j - 1, k,     n)];
+              if (j < n - 1) u_new += u[IJK2INDEX(i,     j + 1, k,     n)];
+              if (k > 1)     u_new += u[IJK2INDEX(i,     j,     k - 1, n)];
+              if (k < n - 1) u_new += u[IJK2INDEX(i,     j,     k + 1, n)];
+
+              u_new /= 6.0;
+
+              u[IJK2INDEX(i, j, k, n)] = u_new;
+            }
+          }
         }
+
+        #pragma omp barrier
       }
     }
   }
