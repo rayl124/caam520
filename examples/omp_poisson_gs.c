@@ -21,7 +21,7 @@ double f_rhs(double x, double y, double z)
 
 void gauss_seidel(double *u, const double *f, int n, int num_iter)
 {
-  const double h = 1.0/(n - 1);
+  const double h = 1.0/(n + 1);
   const double h2 = h*h;
 
   #pragma omp parallel
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  const double h = 1.0/(n - 1);
+  const double h = 1.0/(n + 1);
 
   omp_set_num_threads(num_threads);
 
@@ -96,9 +96,9 @@ int main(int argc, char **argv)
   for (int k = 0; k < n; k++) {
     for (int j = 0; j < n; j++) {
       for (int i = 0; i < n; i++) {
-        const double x = i*h;
-        const double y = j*h;
-        const double z = k*h;
+        const double x = (i + 1)*h;
+        const double y = (j + 1)*h;
+        const double z = (k + 1)*h;
         f[IJK2INDEX(i, j, k, n)] = f_rhs(x, y, z);
         u[IJK2INDEX(i, j, k, n)] = 0.0;
       }
@@ -115,9 +115,9 @@ int main(int argc, char **argv)
   for (int k = 0; k < n; k++) {
     for (int j = 0; j < n; j++) {
       for (int i = 0; i < n; i++) {
-        const double x = i*h;
-        const double y = j*h;
-        const double z = k*h;
+        const double x = (i + 1)*h;
+        const double y = (j + 1)*h;
+        const double z = (k + 1)*h;
         const double u_exact_ijk = u_exact(x, y, z);
 
         norm_u_exact += u_exact_ijk*u_exact_ijk;
